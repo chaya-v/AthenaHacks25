@@ -67,10 +67,11 @@
       .profile-pic {
           width: 200px;
           height: 250px;
-          background: #ddd;
-          border-radius: 10px;
+          border: 6px solid #ffb8dd;
+            object-fit: cover;
           margin-right: 20px;
           flex-shrink: 0;
+          
       }
       .match-info {
           text-align: left;
@@ -113,9 +114,7 @@
       </div>
       <div class="match-container">
           <button class="arrow left-arrow" onclick="prevMatch()">&#9665;</button>
-          <div class="profile-pic" id="profile-pic">
-              <!-- You can load a profile image if available -->
-          </div>
+          <img src="placeholder/AdobeStock_805282248.jpeg" alt="placeholder" class=profile-pic>
           <div class="match-info" id="match-info">
               <!-- Match details will be displayed here -->
           </div>
