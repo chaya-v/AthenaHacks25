@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +36,9 @@
             margin-bottom: 20px;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -64,17 +67,17 @@
             color: #1e90ff;
             cursor: pointer;
         }
-
     </style>
 
 </head>
+
 <body>
     <div class="container" id="main-container">
         <h2 id="form-title">Login</h2>
         <div id="login-form">
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
-            <a href="index.html"><button onclick="submitForm()">Login</button></a>
+            <button onclick="submitForm(event)">Login</button>
         </div>
 
         <div id="register-form" style="display: none;">
@@ -98,7 +101,6 @@
             </select>
 
             <label for="interests">Interests:</label>
-
             <select id="interests" multiple>
                 <option value="hiking">Hiking</option>
                 <option value="mountains">Mountains</option>
@@ -108,7 +110,6 @@
             </select>
 
             <label for="hobbies">Hobbies:</label>
-
             <select id="hobbies" multiple>
                 <option value="swimming">Swimming</option>
                 <option value="art">Art</option>
@@ -124,7 +125,7 @@
             <textarea id="adventure" placeholder="Share your experience..."></textarea>
             <label for="bucket-list">What’s on your travel bucket list?</label>
             <input type="text" id="bucket-list" placeholder="Your top destinations">
-            <a href="index.html"><button onclick="submitForm()">Register</button></a>
+            <button type="submit" onclick="submitForm(event)">Register</button>
         </div>
 
         <p class="toggle" onclick="toggleForm()">Don't have an account? Register</p>
@@ -132,6 +133,7 @@
     </div>
     <script>
         let isLogin = true;
+
         function toggleForm() {
             isLogin = !isLogin;
             document.getElementById("form-title").innerText = isLogin ? "Login" : "Register";
@@ -146,10 +148,48 @@
             document.getElementById("additional-details").style.display = "block";
         }
 
-        function submitForm() {
-            alert(isLogin ? "Logging in..." : "Registration Completed!");
-        }
+        async function submitForm(event) {
+            event.preventDefault();
 
+            const userData = {
+                fullName: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('reg-password').value,
+                address: document.getElementById('address').value,
+                birthday: document.getElementById('birthday').value,
+                travelLocation: document.getElementById('travel-location').value,
+                travelTime: document.getElementById('travel-time').value,
+                budget: document.getElementById('budget').value,
+                interests: Array.from(document.getElementById('interests').selectedOptions).map(option => option.value),
+                hobbies: Array.from(document.getElementById('hobbies').selectedOptions).map(option => option.value),
+                travelReason: document.getElementById('travel-reason').value,
+                dreamDestination: document.getElementById('dream-destination').value,
+                adventure: document.getElementById('adventure').value,
+                bucketList: document.getElementById('bucket-list').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:8000/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData),
+                });
+
+                if (response.ok) {
+                    alert("Registration Completed!");
+                    window.location.href = 'index.html';
+                } else {
+                    const errorMessage = await response.text();
+                    alert(`Error: ${errorMessage}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to register. Please try again later.');
+            }
+        }
     </script>
 </body>
+
 </html>
