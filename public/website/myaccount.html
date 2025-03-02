@@ -1,213 +1,198 @@
 <!DOCTYPE html>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #f8cdda, #1e90ff);
-        display: flex;
-        justify-content: center;
-        margin: 0;
-        overflow-y: auto;
-    }
-	
-    .container {
-            max-width: 900px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.7s ease-in-out;
-     }
-     @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-	.header {
-            font-size: 40px;
-            font-weight: 700;
-            color: #ff4081;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-			text-align: center;
-        }
-		.nav {
-            margin: 20px 0;
-			text-align: center;
-        }
-        .nav button {
-            background: #ff4081;
-            border: none;
-            padding: 12px 25px;
-            color: white;
-            font-size: 18px;
-            margin: 8px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
-        }
-        .nav button:hover {
-            background: #e6006e;
-            transform: scale(1.1);
-        }
-    .selection-group {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-    .selection-option {
-        padding: 10px 15px;
-        border: 2px solid #e6006e;;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: 0.3s;
-        text-align: center;
-    }
-    .selection-option:hover, .selection-option.selected {
-        background: #e6006e;
-        color: white;
-    }
-    textarea, input {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        font-family: Arial, sans-serif;
-    }
-    form input, form textarea, .selection-group {
-    margin-top: 5px;
-    margin-bottom: 15px;
-    }
-    button {
-        background: #ff4081;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 30px;
-        margin-top: 15px;
-		font-size: 18px;
-		cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    button:hover {
-        background: #e6006e;
-        transform: scale(1.1);
-    }
-</style>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Page</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Page</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background: linear-gradient(135deg, #f8cdda, #1e90ff);
+          display: flex;
+          justify-content: center;
+          margin: 0;
+          overflow-y: auto;
+      }
+      .container {
+          max-width: 900px;
+          margin: 50px auto;
+          background: white;
+          padding: 30px;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          animation: fadeIn 0.7s ease-in-out;
+      }
+      @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+      .header {
+          font-size: 40px;
+          font-weight: 700;
+          color: #ff4081;
+          text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+          text-align: center;
+      }
+      .nav {
+          margin: 20px 0;
+          text-align: center;
+      }
+      .nav button {
+          background: #ff4081;
+          border: none;
+          padding: 12px 25px;
+          color: white;
+          font-size: 18px;
+          margin: 8px;
+          border-radius: 30px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+      }
+      .nav button:hover {
+          background: #e6006e;
+          transform: scale(1.1);
+      }
+      .selection-group {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+      }
+      .selection-option {
+          padding: 10px 15px;
+          border: 2px solid #e6006e;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: 0.3s;
+          text-align: center;
+      }
+      .selection-option:hover, .selection-option.selected {
+          background: #e6006e;
+          color: white;
+      }
+      textarea, input {
+          width: 100%;
+          padding: 10px;
+          margin-top: 5px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          font-family: Arial, sans-serif;
+      }
+      form input, form textarea, .selection-group {
+          margin-top: 5px;
+          margin-bottom: 15px;
+      }
+      button {
+          background: #ff4081;
+          color: white;
+          border: none;
+          padding: 10px 15px;
+          border-radius: 30px;
+          margin-top: 15px;
+          font-size: 18px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+      }
+      button:hover {
+          background: #e6006e;
+          transform: scale(1.1);
+      }
+  </style>
 </head>
 <body>
-    <div class="container">
-		
-		<div class="header">Your Account</div>
-		
-	    <div class="nav">
-			<a href="index.html">
-            <button>Home</button></a>
-            <a href="matches.html">
-            <button>Find A Sister</button></a>
-			<a href="chat.html">
-            <button>Chat</button></a>
-			<a href="tips.html">
-            <button>Tips</button></a>
-        </div>
-		
-        <form id="account-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="John Doe" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="johndoe@example.com" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" value="password123" required>
-            
-            <label for="address">Country:</label>
-            <input type="text" id="address" name="address" value="USA" required>
-            
-            <label for="birthday">Birthday:</label>
-            <input type="date" id="birthday" name="birthday" value="1990-01-01" required>
-            
-            <label for="travel-location">Where do you want to travel?</label>
-            <input type="text" id="travel-location" name="travel-location" value="Paris">
-            
-            <label for="travel-time">When do you want to travel?</label>
-            <input type="text" id="travel-time" name="travel-time" value="Summer 2025">
-            
-            <label for="budget">Budget:</label>
-            <div class="selection-group">
-                <div class="selection-option" data-value="luxury">Luxury</div>
-                <div class="selection-option" data-value="moderate">Moderate</div>
-                <div class="selection-option" data-value="affordable">Affordable</div>
-            </div>
-            <input type="hidden" name="budget" id="budget" required>
-            
-            <label for="interests">Interests:</label>
-            <div class="selection-group multi-select" id="interests">
-                <div class="selection-option" data-value="hike">Hike</div>
-                <div class="selection-option" data-value="mountains">Mountains</div>
-                <div class="selection-option" data-value="beaches">Beaches</div>
-                <div class="selection-option" data-value="nightlife">Nightlife</div>
-                <div class="selection-option" data-value="adventure">Adventure</div>
-            </div>
-            <input type="hidden" name="selected-interests" id="selected-interests">
-            
-            <label for="hobbies">Hobbies:</label>
-            <div class="selection-group multi-select" id="hobbies">
-                <div class="selection-option" data-value="swimming">Swimming</div>
-                <div class="selection-option" data-value="art">Art</div>
-                <div class="selection-option" data-value="reading">Reading</div>
-                <div class="selection-option" data-value="hiking">Hiking</div>
-            </div>
-            <input type="hidden" name="selected-hobbies" id="selected-hobbies">
-            
-            <label for="why-travel">Tell us why you love traveling:</label>
-            <textarea id="why-travel" name="why-travel">I love traveling to explore new cultures.</textarea>
-            
-            <label for="travel-companion">If you could travel with anyone (dead or alive), who would it be?</label>
-            <textarea id="travel-companion" name="travel-companion">My best friend</textarea>
-            
-            <label for="dream-destination">What’s your ultimate dream destination?</label>
-            <textarea id="dream-destination" name="dream-destination">Bali</textarea>
-            
-            <button type="submit">Update</button>
-        </form>
-    </div>
-    
-    <script>
-        $(document).ready(function() {
-            $('.selection-option').click(function() {
-                let isMultiSelect = $(this).parent().hasClass('multi-select');
-                
-                if (isMultiSelect) {
-                    $(this).toggleClass('selected');
-                    updateMultiSelect($(this).parent().attr('id'));
-                } else {
-                    $(this).siblings().removeClass('selected');
-                    $(this).addClass('selected');
-                    $('#' + $(this).parent().attr('id')).val($(this).data('value'));
-                }
-            });
-        });
+  <div class="container">
+      <div class="header">Your Account</div>
+      <div class="nav">
+          <a href="index.html"><button>Home</button></a>
+          <a href="matches.html"><button>Find A Sister</button></a>
+          <a href="chat.html"><button>Chat</button></a>
+          <a href="tips.html"><button>Tips</button></a>
+      </div>
+      <form id="account-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" value="John Doe" required>
+          
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" value="johndoe@example.com" required>
+          
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" value="password123" required>
+          
+          <label for="address">Country:</label>
+          <input type="text" id="address" name="address" value="USA" required>
+          
+          <label for="birthday">Birthday:</label>
+          <input type="date" id="birthday" name="birthday" value="1990-01-01" required>
+          
+          <label for="travel-location">Where do you want to travel?</label>
+          <input type="text" id="travel-location" name="travel-location" value="Paris">
+          
+          <label for="travel-time">When do you want to travel?</label>
+          <input type="text" id="travel-time" name="travel-time" value="Summer 2025">
+          
+          <label for="budget">Budget:</label>
+          <div class="selection-group">
+              <div class="selection-option" data-value="luxury">Luxury</div>
+              <div class="selection-option" data-value="moderate">Moderate</div>
+              <div class="selection-option" data-value="affordable">Affordable</div>
+          </div>
+          <input type="hidden" name="budget" id="budget" required>
+          
+          <label for="interests">Interests:</label>
+          <div class="selection-group multi-select" id="interests">
+              <div class="selection-option" data-value="hike">Hike</div>
+              <div class="selection-option" data-value="mountains">Mountains</div>
+              <div class="selection-option" data-value="beaches">Beaches</div>
+              <div class="selection-option" data-value="nightlife">Nightlife</div>
+              <div class="selection-option" data-value="adventure">Adventure</div>
+          </div>
+          <input type="hidden" name="selected-interests" id="selected-interests">
+          
+          <label for="hobbies">Hobbies:</label>
+          <div class="selection-group multi-select" id="hobbies">
+              <div class="selection-option" data-value="swimming">Swimming</div>
+              <div class="selection-option" data-value="art">Art</div>
+              <div class="selection-option" data-value="reading">Reading</div>
+              <div class="selection-option" data-value="hiking">Hiking</div>
+          </div>
+          <input type="hidden" name="selected-hobbies" id="selected-hobbies">
+          
+          <label for="why-travel">Tell us why you love traveling:</label>
+          <textarea id="why-travel" name="why-travel">I love traveling to explore new cultures.</textarea>
+          
+          <label for="travel-companion">If you could travel with anyone (dead or alive), who would it be?</label>
+          <textarea id="travel-companion" name="travel-companion">My best friend</textarea>
+          
+          <label for="dream-destination">What’s your ultimate dream destination?</label>
+          <textarea id="dream-destination" name="dream-destination">Bali</textarea>
+          
+          <button type="submit">Update</button>
+      </form>
+  </div>
+  <script>
+      $(document).ready(function() {
+          $('.selection-option').click(function() {
+              let isMultiSelect = $(this).parent().hasClass('multi-select');
+              
+              if (isMultiSelect) {
+                  $(this).toggleClass('selected');
+                  updateMultiSelect($(this).parent().attr('id'));
+              } else {
+                  $(this).siblings().removeClass('selected');
+                  $(this).addClass('selected');
+                  $('#' + $(this).parent().attr('id')).val($(this).data('value'));
+              }
+          });
+      });
 
-        function updateMultiSelect(id) {
-            let selectedValues = [];
-            $('#' + id + ' .selected').each(function() {
-                selectedValues.push($(this).data('value'));
-            });
-            $('#selected-' + id).val(selectedValues.join(','));
-        }
-    </script>
+      function updateMultiSelect(id) {
+          let selectedValues = [];
+          $('#' + id + ' .selected').each(function() {
+              selectedValues.push($(this).data('value'));
+          });
+          $('#selected-' + id).val(selectedValues.join(','));
+      }
+  </script>
 </body>
 </html>
-
-
-
-
