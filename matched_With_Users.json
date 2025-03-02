@@ -1,37 +1,3 @@
 {
-  "matches": [
-    {
-      "name": "Chaya",
-      "travel_details": {
-        "location": "SD",
-        "start_date": "3/4/2025",
-        "end_date": "3/8/2025"
-      },
-      "travel_reason": "Gives me space to think clearly",
-      "shared_interests": ["mountains"],
-      "match_summary": "This user is traveling to SD during overlapping dates (3/5/2025-3/8/2025) and shares an interest in mountains."
-    },
-    {
-      "name": "Athena",
-      "travel_details": {
-        "location": "SD",
-        "start_date": "3/3/2025",
-        "end_date": "3/10/2025"
-      },
-      "travel_reason": "Alone space",
-      "shared_interests": ["mountains"],
-      "match_summary": "This user is traveling to SD during overlapping dates (3/5/2025-3/10/2025) and shares an interest in mountains."
-    },
-    {
-      "name": "a",
-      "travel_details": {
-        "location": "SD",
-        "start_date": "3/4/2025",
-        "end_date": "3/9/2025"
-      },
-      "travel_reason": "Space",
-      "shared_interests": ["mountains"],
-      "match_summary": "This user is traveling to SD during overlapping dates (3/5/2025-3/9/2025) and shares an interest in mountains."
-    }
-  ]
+  "matches": []
 }
