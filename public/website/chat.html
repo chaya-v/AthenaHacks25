@@ -1,29 +1,39 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with Travel Sisters</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+    <title>TravelHER Chat</title>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="chat.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #f8cdda, #1e90ff);
+            min-height: 100vh;
+            background-attachment: fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            text-align: center;
+        }
+ 
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8cdda, #1e90ff);
+            min-height: 100vh;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            text-align: center;
         }
 
         .chat-container {
-            width: 80%;
-            max-width: 900px;
+            max-width: 85%;
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             display: flex;
@@ -31,15 +41,15 @@
         }
 
         .chat-sidebar {
-            width: 30%;
-            background: #ffb6c1;
-            padding: 15px;
-            border-radius: 15px 0 0 15px;
+            width: 20%;
+            background: #ffebf0;
+            padding: 10px;
+            border-radius: 10px;
         }
 
         .chat-sidebar h2 {
             text-align: center;
-            color: #333;
+            color: #ff4081;
         }
 
         .chat-list {
@@ -68,15 +78,15 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
-        .chat-messages {
-            height: 300px;
+		
+		#messages {
+			      height: 300px;
             overflow-y: auto;
-            padding: 10px;
-            background: #f0f8ff;
+            background: #ffebf0;
             border-radius: 10px;
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+		}
+
 
         .message {
             margin: 10px 0;
@@ -124,7 +134,7 @@
         .chat-input button:hover {
             background: #e6006e;
         }
-		.nav {
+        .nav {
             margin: 20px 0;
         }
         .nav button {
@@ -143,15 +153,14 @@
             background: #e6006e;
             transform: scale(1.1);
         }
-		 .container {
-            max-width: 900px;
+         .container {
+            max-width: 90%;
             margin: 50px auto;
             background: white;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: fadeIn 1s ease-in-out;
-			text-align: center;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
@@ -162,49 +171,48 @@
             font-weight: 700;
             color: #ff4081;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-			align-content: center;
+            align-content: center;
         }
-
+		
+        #input { width: 80%; padding: 10px;}
+        button { padding: 10px;}
     </style>
-
 </head>
 <body>
-	<div class="container">
-        <div class="header">Sister Chat</div>
-	    <div class="nav">
-			<a href="index.html">
-            <button>Home</button></a>
-			<a href="matches.html">
-            <button>Find Sisters</button></a>
-			<a href="tips.html">
-            <button>Tips</button></a>
-			<a href="myaccount.html">
-            <button>My Account</button></a>
-        </div>
-
-	<div class="chat-container">
-        <div class="chat-sidebar">
-            <h2>Chat Partners</h2>
-
-            <ul class="chat-list">
-                <li>Chat Partner 1</li>
-                <li>Chat Partner 2</li>
-            </ul>
-       </div>
-		
-        <div class="chat-box">
-            <div class="chat-messages">
-                <div class="message received">Hello! How's your travel planning going?</div>
-                <div class="message sent">Hey! It's going great, just finalizing my itinerary.</div>
+        <div class="container">
+            <div class="header">TravelHER Chat</div>
+            <div class="nav">
+                <a href="index.html">
+                <button>Home</button></a>
+                <a href="matches.html">
+                <button>Find Sisters</button></a>
+                <a href="tips.html">
+                <button>Tips</button></a>
+                <a href="myaccount.html">
+                <button>My Account</button></a>
             </div>
-
-          <div class="chat-input">
-                <input type="text" id="messageInput" placeholder="Type a message...">
-                <button onclick="sendMessage()">Send</button>
+    
+        <div class="chat-container">
+            <div class="chat-sidebar">
+                <h2>Chat Partners</h2>
+    
+                <ul class="chat-list">
+                    <li>Chat Partner 1</li>
+                    <li>Chat Partner 2</li>
+                </ul>
+           </div>
+            
+            <div class="chat-box">
+                <div class="chat-messages">
+                    <div id="messages"></div>
+                </div>
+    
+              <div class="chat-input">
+    				<input id="input" type="text" placeholder="Type a message..." />
+    				<button onclick="sendMessage()">Send</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 </body>
 </html>
