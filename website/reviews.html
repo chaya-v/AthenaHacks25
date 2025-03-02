@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Sister</title>
+    <title>Reviews - Travel Sister</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -25,10 +25,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: fadeIn 1s ease-in-out;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+
         .header {
             font-size: 42px;
             font-weight: 700;
@@ -54,77 +51,65 @@
             background: #e6006e;
             transform: scale(1.1);
         }
-        .pink-container {
-            background: #ffebf0;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            position: relative;
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Two Cards Layout */
-        .cards-container {
+        .header {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ff4081;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .reviews-container {
             display: flex;
             justify-content: center;
             gap: 30px;
             margin-top: 20px;
             flex-wrap: wrap;
         }
-        .card {
+        .review-card {
             background: white;
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 45%;
+            width: 30%;
             text-align: left;
-            font-size: 50px;
         }
-        .card h2 {
-            font-size: 28px;
+        .review-card h3 {
+            font-size: 22px;
             color: #ff4081;
         }
-        .card p {
+        .review-card p {
             font-size: 18px;
             line-height: 1.6;
         }
+        .review-card .reviewer {
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
         @media (max-width: 768px) {
-            .card {
+            .review-card {
                 width: 90%;
             }
         }
-
-        /* Founder Images */
-        .founder-images {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .founder-images img {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            border: 4px solid #ff4081;
-            object-fit: cover;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* CTA Button */
-        .cta {
+        .back-btn {
             background: #ff4081;
             color: white;
-            padding: 18px 30px;
+            padding: 14px 28px;
             display: inline-block;
             margin-top: 25px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 50px;
+            font-size: 18px;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
         }
-        .cta:hover {
+        .back-btn:hover {
             background: #e6006e;
             transform: scale(1.1);
         }
@@ -140,39 +125,26 @@
             <a href="reviews.html"><button>Reviews</button></a>
             <a href="myaccount.html"><button>My Account</button></a>
         </div>
-
-        <div class="pink-container">
-            <div class="cards-container">
-                <!-- Left Card: Why Travel Sister? -->
-                <div class="card">
-                    <h2>Why Travel Sister?</h2>
-                    <p>
-                        We believe that every woman should be able to explore the world without fear. Travel Sister is a platform designed to empower women travelers by providing companionship, safety, and meaningful connections.
-                    </p>
-                </div>
-
-                <!-- Right Card: Our Motto -->
-                <div class="card">
-                    <h2>Our Motto</h2>
-                    <p>
-                        "Explore Fearlessly, Connect Freely." Our mission is to make solo travel safer and more exciting by connecting women travelers worldwide. Together, we can make the world a friendlier place!
-                    </p>
-                </div>
+    <div class="container">
+        <div class="header">What Our Travelers Say</div>
+        <div class="reviews-container">
+            <div class="review-card">
+                <h3>Life-Changing Experience!</h3>
+                <p>"Travel Sister helped me find an amazing travel companion for my trip to Paris. I felt safe and had the best time!"</p>
+                <div class="reviewer">- Sarah L.</div>
             </div>
-
-            <h2>Meet the Founders</h2>
-            <p>
-                Travel Sister was founded by passionate women travelers who experienced the challenges of solo travel firsthand. They envisioned a safe and vibrant community where women could find travel companions and create unforgettable memories.
-            </p>
-
-            <div class="founder-images">
-                <img src="founder1.jpg" alt="Founder 1">
-                <img src="founder2.jpg" alt="Founder 2">
-                <img src="founder3.jpg" alt="Founder 3">
+            <div class="review-card">
+                <h3>Highly Recommended</h3>
+                <p>"I was hesitant about solo travel, but this platform connected me with wonderful travel buddies. It’s a must-have for female travelers!"</p>
+                <div class="reviewer">- Emily R.</div>
             </div>
-
-            <a href="register.html" class="cta">Get Started</a>
+            <div class="review-card">
+                <h3>Safe & Fun</h3>
+                <p>"I met my best friend through Travel Sister! We’ve explored five countries together, and it's been an incredible journey!"</p>
+                <div class="reviewer">- Jessica M.</div>
+            </div>
         </div>
+        <a href="index.html" class="back-btn">← Back to Home</a>
     </div>
 </body>
 </html>
