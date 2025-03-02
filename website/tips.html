@@ -14,10 +14,10 @@
 		<div class="nav">
 			<a href="index.html">
             <button>Home</button></a>
+            <a href="matches.html">
+            <button>Find A Sister</button></a>
 			<a href="chat.html">
             <button>Chat</button></a>
-			<a href="tips.html">
-            <button>Tips</button></a>
 			<a href="myaccount.html">
             <button>My Account</button></a>
         </div>
@@ -96,6 +96,11 @@
             width: 60%;
             max-height: 90vh;
             overflow-y: auto;
+            animation: fadeIn 0.7s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .static-title {
             position: sticky;
