@@ -10,6 +10,7 @@
 <body>
     <div class="container">
         <h2>Your Account Details</h2>
+        <div class="account-sidebar">My Account</div>
         <form id="account-form">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="John Doe" required>
@@ -118,6 +119,18 @@
         width: 50%;
         max-height: 90vh;
         overflow-y: auto;
+        position: relative;
+    }
+    .account-sidebar {
+        position: fixed;
+        top: 50px;
+        left: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        background: #ff758c;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
     }
     .selection-group {
         display: flex;
