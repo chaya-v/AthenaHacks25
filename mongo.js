@@ -17,23 +17,71 @@ mongoose.connect("mongodb+srv://Team7:Team7@cluster0.gwmug.mongodb.net/?retryWri
 
 
 const userSchema = new mongoose.Schema({
-    fullName: String,
-    email: String,
-    password: String,
-    address: String,
-    birthday: String,
-    travelLocation: String,
-    travelTime: String,
-    budget: String,
-    interests: [String],
-    hobbies: [String],
-    travelReason: String,
-    dreamDestination: String,
-    adventure: String,
-    bucketList: String
+    fullName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    birthday: {
+        type: Date,
+        required: true
+    },
+    travelLocation: {
+        type: String,
+        required: true
+    },
+    travelStart: {
+        type: Date,
+        required: true
+    },
+    travelEnd: {
+        type: Date,
+        required: true
+    },
+    budget: {
+        type: String,
+        required: true
+    },
+    interests: {
+        type: [String],
+        required: true
+    },
+    hobbies: {
+        type: [String],
+        required: true
+    },
+    travelReason: {
+        type: String,
+        required: true
+    },
+    dreamDestination: {
+        type: String,
+        required: true
+    },
+    adventure: {
+        type: String,
+        required: true
+    },
+    bucketList: {
+        type: String,
+        required: true
+    }
 });
 
 const User = mongoose.model("User", userSchema);
+const fs = require('fs');
 
 app.post("/register", async (req, res) => {
     try {
@@ -45,8 +93,16 @@ app.post("/register", async (req, res) => {
     }
 });
 
+app.get("/users", async (req, res) => {
+    try {
+        const users = await User.find();
+        fs.writeFileSync('userData.json', JSON.stringify(users, null, 2));
+        res.status(200).send('User data has been written to userData.json');
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
 
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.listen(8000, () => {
+    console.log('Server is running on port 8000');
 });

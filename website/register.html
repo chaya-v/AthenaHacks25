@@ -65,32 +65,42 @@
             color: #1e90ff;
             cursor: pointer;
         }
+
+        #coming-soon-banner {
+            display: none;
+            color: red;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container" id="main-container">
         <h2 id="form-title">Login</h2>
+
+        <!-- Login Form -->
         <div id="login-form">
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
-            <button onclick="submitForm(event)">Login</button>
+            <button onclick="displayComingSoon()">Login</button>
+            <p id="coming-soon-banner">Coming Soon...</p>
         </div>
 
+        <!-- Register Form -->
         <div id="register-form" style="display: none;">
             <input type="text" id="name" placeholder="Full Name" required>
             <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="reg-password" placeholder="Password" required>
             <input type="text" id="address" placeholder="Country" required>
-            <input type="date" id="birthday" required>
-
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" placeholder="Select your birthday" required>
+            
             <label for="travel-location">Where do you want to travel?</label>
             <select id="travel-location" required>
                 <option value="SF">SF</option>
                 <option value="SD">SD</option>
                 <option value="LA">LA</option>
             </select>
-
 
             <label for="travel-start">Start Date:</label>
             <input type="date" id="travel-start" required>
@@ -101,6 +111,7 @@
             <button onclick="nextStep()">Next</button>
         </div>
 
+        <!-- Additional Details Form -->
         <div id="additional-details" style="display: none;">
             <h2>Tell us more about your travel preferences</h2>
             <label for="budget">Budget:</label>
@@ -156,6 +167,11 @@
         function nextStep() {
             document.getElementById("register-form").style.display = "none";
             document.getElementById("additional-details").style.display = "block";
+        }
+
+        function displayComingSoon() {
+            document.querySelector("button").style.display = "none";  // Hide the login button
+            document.getElementById("coming-soon-banner").style.display = "block";  // Show the "Coming Soon..." text
         }
 
         async function submitForm(event) {
