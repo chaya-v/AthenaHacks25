@@ -70,6 +70,19 @@ app.get("/matches", (req, res) => {
     }
 });
 
+// New endpoint: Get the most recently registered user details
+app.get("/user/latest", async (req, res) => {
+    try {
+        const latestUser = await User.findOne().sort({ _id: -1 });
+        if (!latestUser) {
+            return res.status(404).json({ message: "No user found" });
+        }
+        res.status(200).json(latestUser);
+    } catch (error) {
+        res.status(500).json({ message: "Error retrieving latest user", error });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
