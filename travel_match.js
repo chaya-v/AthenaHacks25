@@ -1,38 +1,37 @@
 const fs = require('fs');
 const { MongoClient } = require('mongodb');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const fetch = require('node-fetch');  // Importing node-fetch
 
+const apiKey = 'AIzaSyCJafWiBv88DX2iMj6pgjDc_NOZwSu6wL4';
+const apiUrl = 'https://generativeai.googleapis.com/v1/models/gemini-1.5-flash:generateContent'; // Replace with the correct endpoint
 
-const genAI = new GoogleGenerativeAI("AIzaSyAFHTQwJDAwIqfRhL345xKAoSilfD7b-VY");
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+// const uri = "mongodb+srv://Team7:Team7@cluster0.gwmug.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Function to extract and match users based on travel location and travel dates
+async function getUserData() {
+    // Read the user data from the JSON file
+    const data = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 
-const uri = "mongodb+srv://Team7:Team7@cluster0.gwmug.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"; // Replace with your MongoDB connection string
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    // Extract and map user data to include only relevant fields for matching
+    return data.map(user => ({
+        fullName: user.fullName,
+        email: user.email,
+        travelLocation: user.travelLocation,
+        travelStart: new Date(user.travelStart), 
+        travelEnd: new Date(user.travelEnd),
+        interests: user.interests,
+        hobbies: user.hobbies,
+        budget: user.budget
+    }));
+}
 
+function checkTravelDateOverlap(start1, end1, start2, end2) {
+    // Check if two date ranges overlap
+    return (start1 <= end2 && end1 >= start2);
+}
 
-// async function getUserData() {
-//    try {
-//        await client.connect();
-//        const database = client.db('test'); // Replace with your database name
-//        const collection = database.collection('users'); // Replace with your collection name
-//        const userData = await collection.find({}).toArray();
-      
-//        // Write user data to userData.json
-//        fs.writeFileSync('userData.json', JSON.stringify(userData, null, 2));
-      
-//        console.log('✅ User data fetched and saved to userData.json');
-//        console.log('User Data:', userData);
-      
-//        return userData;
-//    } catch (error) {
-//        console.error('Error fetching user data:', error);
-//        throw error;
-//    } finally {
-//        await client.close();
-//    }
-// }
-
+// Function to match users based on location, travel dates, interests, and hobbies
 function matchUsers(data) {
     const matches = [];
 
@@ -41,76 +40,78 @@ function matchUsers(data) {
             const user1 = data[i];
             const user2 = data[j];
 
-            // ✅ Match if travel location & travel time are the same
+            // Match based on travel location first
             if (user1.travelLocation === user2.travelLocation) {
-                
-                // ✅ Find shared interests & hobbies
-                const sharedInterests = user1.interests.filter(interest => user2.interests.includes(interest));
-                const sharedHobbies = user1.hobbies.filter(hobby => user2.hobbies.includes(hobby));
-                console.log (`True`);
 
-                // ✅ If there's a match, push the users into the array
-                if (sharedInterests.length > 0 || sharedHobbies.length > 0) {
-                    matches.push({
-                        user1: user1.fullName,
-                        user2: user2.fullName,
-                        travelLocation: user1.travelLocation,
-                        travelTime: user1.travelTime,
-                        sharedInterests,
-                        sharedHobbies,
-                        budget1: user1.budget,  // Keeping budget as a string
-                        budget2: user2.budget   // Keeping budget as a string
-                    });
+                // Check if the travel dates overlap
+                if (checkTravelDateOverlap(user1.travelStart, user1.travelEnd, user2.travelStart, user2.travelEnd)) {
+                    
+                    // Find shared interests and hobbies
+                    const sharedInterests = user1.interests.filter(interest => user2.interests.includes(interest));
+                    const sharedHobbies = user1.hobbies.filter(hobby => user2.hobbies.includes(hobby));
+                    
+                    if (sharedInterests.length > 0 || sharedHobbies.length > 0) {
+                        // If match found, add to the list
+                        matches.push({
+                            user1: user1.fullName,
+                            user2: user2.fullName,
+                            travelLocation: user1.travelLocation,
+                            travelStart: user1.travelStart.toISOString(),
+                            travelEnd: user1.travelEnd.toISOString(),
+                            sharedInterests,
+                            sharedHobbies,
+                            budget1: user1.budget,  // Keeping budget as a string
+                            budget2: user2.budget   // Keeping budget as a string
+                        });
+                    }
                 }
             }
         }
     }
 
-    // ✅ Save matched users to a file
-    fs.writeFileSync("matched_users.json", JSON.stringify(matches, null, 2));
-    console.log("✅ Matched users saved to matched_users.json");
+    // Save matched users to a file
+    fs.writeFileSync('matched_users.json', JSON.stringify(matches, null, 2));
+    console.log('✅ Matched users saved to matched_users.json');
 
     return matches;
 }
 
+// Function to generate content using the Generative AI API (via HTTP request)
 async function generateContent() {
-   try {
-       const userData = await getUserData();
-       const matches = matchUsers(userData);
-      
-       // Write matched users to matched_users.json
-       fs.writeFileSync('matched_users.json', JSON.stringify(matches, null, 2));
-      
-       const prompt = `Here are the matched users based on their destinations and dates: ${JSON.stringify(matches)}`;
-       const result = await model.generateContent(prompt);
-       console.log(result.response.text());
-   } catch (error) {
-       console.error('Error generating content:', error);
-   }
+    try {
+        const userData = await getUserData();
+
+        // Match users based on location, travel dates, and profile information
+        const matches = matchUsers(userData);
+
+        // Write matched users to matched_users.json
+        fs.writeFileSync('matched_users.json', JSON.stringify(matches, null, 2));
+
+        // Prepare the prompt for generating content
+        const prompt = `Here are the matched users based on their destinations and dates: ${JSON.stringify(matches)}`;
+
+        // Make the API call to generate content using fetch
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt: prompt })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Request failed with status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Log the generated content
+        console.log('Generated Content:', data);
+    } catch (error) {
+        console.error('Error generating content:', error);
+    }
 }
-
-async function logUserData() {
-   try {
-       await client.connect();
-       const database = client.db('test'); // Replace with your database name
-       const collection = database.collection('users'); // Replace with your collection name
-       const userData = await collection.find({}).toArray();
-       console.log('Current MongoDB Data:', userData);
-   } catch (error) {
-       console.error('Error logging user data:', error);
-   } finally {
-       await client.close();
-   }
-}
-
-
-// Call the logUserData function to log the current MongoDB data
-logUserData().catch(console.error);
-
 
 // Call the generateContent function to generate content
 generateContent().catch(console.error);
-
-
-// Test the getUserData function
-getUserData().catch(console.error);
