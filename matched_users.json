@@ -1,0 +1,46 @@
+[
+  {
+    "user1": {
+      "id": 1,
+      "name": "Alice",
+      "destination": "Paris",
+      "startDate": "2025-03-10",
+      "endDate": "2025-03-15"
+    },
+    "user2": {
+      "id": 3,
+      "name": "Charlie",
+      "destination": "Paris",
+      "startDate": "2025-03-12",
+      "endDate": "2025-03-18"
+    },
+    "matchingDates": [
+      "2025-03-12",
+      "2025-03-13",
+      "2025-03-14",
+      "2025-03-15"
+    ]
+  },
+  {
+    "user1": {
+      "id": 2,
+      "name": "Bob",
+      "destination": "London",
+      "startDate": "2025-03-15",
+      "endDate": "2025-03-20"
+    },
+    "user2": {
+      "id": 5,
+      "name": "Eve",
+      "destination": "London",
+      "startDate": "2025-03-17",
+      "endDate": "2025-03-22"
+    },
+    "matchingDates": [
+      "2025-03-17",
+      "2025-03-18",
+      "2025-03-19",
+      "2025-03-20"
+    ]
+  }
+]

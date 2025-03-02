@@ -1,0 +1,17 @@
+[
+    { "id": 1, "name": "Alice", "destination": "Paris", "startDate": "2025-03-10", "endDate": "2025-03-15" },
+    { "id": 2, "name": "Bob", "destination": "London", "startDate": "2025-03-15", "endDate": "2025-03-20" },
+    { "id": 3, "name": "Charlie", "destination": "Paris", "startDate": "2025-03-12", "endDate": "2025-03-18" },
+    { "id": 4, "name": "David", "destination": "New York", "startDate": "2025-03-20", "endDate": "2025-03-25" },
+    { "id": 5, "name": "Eve", "destination": "London", "startDate": "2025-03-17", "endDate": "2025-03-22" },
+    { "id": 6, "name": "Frank", "destination": "Tokyo", "startDate": "2025-03-25", "endDate": "2025-03-30" },
+    { "id": 7, "name": "Grace", "destination": "Paris", "startDate": "2025-03-10", "endDate": "2025-03-15" },
+    { "id": 8, "name": "Hank", "destination": "Berlin", "startDate": "2025-03-18", "endDate": "2025-03-23" },
+    { "id": 9, "name": "Ivy", "destination": "London", "startDate": "2025-03-15", "endDate": "2025-03-20" },
+    { "id": 10, "name": "Jack", "destination": "New York", "startDate": "2025-03-20", "endDate": "2025-03-25" },
+    { "id": 11, "name": "Kathy", "destination": "Paris", "startDate": "2025-03-10", "endDate": "2025-03-15" },
+    { "id": 12, "name": "Leo", "destination": "Tokyo", "startDate": "2025-03-25", "endDate": "2025-03-30" },
+    { "id": 13, "name": "Mona", "destination": "Berlin", "startDate": "2025-03-18", "endDate": "2025-03-23" },
+    { "id": 14, "name": "Nina", "destination": "Paris", "startDate": "2025-03-10", "endDate": "2025-03-15" },
+    { "id": 15, "name": "Oscar", "destination": "London", "startDate": "2025-03-15", "endDate": "2025-03-20" }
+]

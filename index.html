@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matched Users</title>
+</head>
+<body>
+    <h1>Matched Users</h1>
+
+    <form id="user-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <ul id="matched-users-list"></ul>
+
+    <script>
+        // Fetch matched users data from matched_users.json
+        fetch('matched_users.json')
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById('matched-users-list');
+                data.forEach(match => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <strong>User 1:</strong> ${match.user1.name} (${match.user1.destination}, ${match.user1.startDate} to ${match.user1.endDate})<br>
+                        <strong>User 2:</strong> ${match.user2.name} (${match.user2.destination}, ${match.user2.startDate} to ${match.user2.endDate})<br>
+                        <strong>Matching Dates:</strong> ${match.matchingDates.join(', ')}
+                    `;
+                    list.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching matched users:', error));
+
+        // Handle form submission
+        document.getElementById('user-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Fetch existing user data
+            fetch('userData.json')
+                .then(response => response.json())
+                .then(userData => {
+                    // Add new user data
+                    const newUser = {
+                        id: userData.length + 1,
+                        name: username,
+                        password: password,
+                        destination: "Unknown",
+                        startDate: "2025-01-01",
+                        endDate: "2025-01-01"
+                    };
+                    userData.push(newUser);
+
+                    // Write updated user data to userData.json
+                    fetch('saveUserData', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('User data saved:', data);
+                    })
+                    .catch(error => console.error('Error saving user data:', error));
+                })
+                .catch(error => console.error('Error fetching user data:', error));
+        });
+    </script>
+</body>
+</html>
