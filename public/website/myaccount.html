@@ -1,249 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Page</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f8cdda, #1e90ff);
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            overflow-y: auto;
-        }
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.7s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .header {
-                font-size: 42px;
-                font-weight: 700;
-                color: #ff4081;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-                text-align: center;
-        }
-        .nav {
-            margin: 20px 0;
-            text-align: center;
-        }
-        .nav button {
-            background: #ff4081;
-                border: none;
-                padding: 14px 28px;
-                color: white;
-                font-size: 20px;
-                margin: 8px;
-                border-radius: 30px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
-        }
-        .nav button:hover {
-            background: #e6006e;
-            transform: scale(1.1);
-        }
-        .selection-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .selection-option {
-            padding: 10px 15px;
-            border: 2px solid #e6006e;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-        }
-        .selection-option:hover, .selection-option.selected {
-            background: #e6006e;
-            color: white;
-        }
-        textarea, input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-family: Arial, sans-serif;
-        }
-        form input, form textarea, .selection-group {
-            margin-top: 5px;
-            margin-bottom: 15px;
-        }
-        button {
-            background: #ff4081;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 30px;
-            margin-top: 15px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        button:hover {
-            background: #e6006e;
-            transform: scale(1.1);
-        }
-    </style>
-    </head>
-    <body>
-    <div class="container">
-        <div class="header">My Account</div>
-        <div class="nav">
-            <a href="index.html"><button>Home</button></a>
-            <a href="matches.html"><button>Find Sisters</button></a>
-            <a href="chat.html"><button>Chat</button></a>
-            <a href="tips.html"><button>Tips</button></a>
-            <a href="reviews.html"><button>Reviews</button></a>
-        </div>
-        <form id="account-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="John Doe" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="johndoe@example.com" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" value="password123" required>
-            
-            <label for="address">Country:</label>
-            <input type="text" id="address" name="address" value="USA" required>
-            
-            <label for="birthday">Birthday:</label>
-            <input type="date" id="birthday" name="birthday" value="1990-01-01" required>
-            
-            <label for="travel-location">Where do you want to travel?</label>
-            <input type="text" id="travel-location" name="travel-location" value="Paris">
-            
-            <label for="travel-time">When do you want to travel?</label>
-            <input type="text" id="travel-time" name="travel-time" value="Summer 2025">
-            
-            <label for="budget">Budget:</label>
-            <div class="selection-group">
-                <div class="selection-option" data-value="luxury">Luxury</div>
-                <div class="selection-option" data-value="moderate">Moderate</div>
-                <div class="selection-option" data-value="affordable">Affordable</div>
-            </div>
-            <input type="hidden" name="budget" id="budget" required>
-            
-            <label for="interests">Interests:</label>
-            <div class="selection-group multi-select" id="interests">
-                <div class="selection-option" data-value="hike">Hike</div>
-                <div class="selection-option" data-value="mountains">Mountains</div>
-                <div class="selection-option" data-value="beaches">Beaches</div>
-                <div class="selection-option" data-value="nightlife">Nightlife</div>
-                <div class="selection-option" data-value="adventure">Adventure</div>
-            </div>
-            <input type="hidden" name="selected-interests" id="selected-interests">
-            
-            <label for="hobbies">Hobbies:</label>
-            <div class="selection-group multi-select" id="hobbies">
-                <div class="selection-option" data-value="swimming">Swimming</div>
-                <div class="selection-option" data-value="art">Art</div>
-                <div class="selection-option" data-value="reading">Reading</div>
-                <div class="selection-option" data-value="hiking">Hiking</div>
-            </div>
-            <input type="hidden" name="selected-hobbies" id="selected-hobbies">
-            
-            <label for="why-travel">Tell us why you love traveling:</label>
-            <textarea id="why-travel" name="why-travel">I love traveling to explore new cultures.</textarea>
-            
-            <label for="travel-companion">If you could travel with anyone (dead or alive), who would it be?</label>
-            <textarea id="travel-companion" name="travel-companion">My best friend</textarea>
-            
-            <label for="dream-destination">What’s your ultimate dream destination?</label>
-            <textarea id="dream-destination" name="dream-destination">Bali</textarea>
-            
-            <button type="submit">Update</button>
-        </form>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Page</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* Your CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f8cdda, #1e90ff);
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      overflow-y: auto;
+    }
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.7s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .header {
+      font-size: 42px;
+      font-weight: 700;
+      color: #ff4081;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    .nav {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .nav button {
+      background: #ff4081;
+      border: none;
+      padding: 14px 28px;
+      color: white;
+      font-size: 20px;
+      margin: 8px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+    }
+    .nav button:hover {
+      background: #e6006e;
+      transform: scale(1.1);
+    }
+    .selection-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .selection-option {
+      padding: 10px 15px;
+      border: 2px solid #e6006e;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+    }
+    .selection-option:hover, .selection-option.selected {
+      background: #e6006e;
+      color: white;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-family: Arial, sans-serif;
+    }
+    form input, form textarea, .selection-group {
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+    button {
+      background: #ff4081;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 30px;
+      margin-top: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #e6006e;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">My Account</div>
+    <div class="nav">
+      <a href="index.html"><button>Home</button></a>
+      <a href="matches.html"><button>Find Sisters</button></a>
+      <a href="chat.html"><button>Chat</button></a>
+      <a href="tips.html"><button>Tips</button></a>
+      <a href="reviews.html"><button>Reviews</button></a>
     </div>
-    <script>
-        $(document).ready(function () {
-            // Fetch stored user data from localStorage
-            let userData = JSON.parse(localStorage.getItem("userData")) || {};
-            // Populate form fields dynamically
-            $("#name").val(userData.name || "");
-            $("#email").val(userData.email || "");
-            $("#password").val(userData.password || ""); 
-            $("#address").val(userData.address || "");
-            $("#birthday").val(userData.birthday || "");
-            $("#travel-location").val(userData.travelLocation || "");
-            $("#travel-time").val(userData.travelTime || "");
-            $("#why-travel").val(userData.whyTravel || "");
-            $("#travel-companion").val(userData.travelCompanion || "");
-            $("#dream-destination").val(userData.dreamDestination || "");
-            // Select budget option
-            if (userData.budget) {
-                $('.selection-option[data-value="' + userData.budget + '"]').addClass('selected');
-                $("#budget").val(userData.budget);
-            }
-            // Select multiple interests and hobbies
-            function selectMultipleValues(id, values) {
-                if (values) {
-                    values.split(",").forEach(value => {
-                        $('#' + id + ' .selection-option[data-value="' + value + '"]').addClass('selected');
-                    });
-                    $('#selected-' + id).val(values);
-                }
-            }
-            selectMultipleValues("interests", userData.interests);
-            selectMultipleValues("hobbies", userData.hobbies);
-            // Handle selection clicks
-            $(".selection-option").click(function () {
-                let isMultiSelect = $(this).parent().hasClass("multi-select");
-                if (isMultiSelect) {
-                    $(this).toggleClass("selected");
-                    updateMultiSelect($(this).parent().attr("id"));
-                } else {
-                    $(this).siblings().removeClass("selected");
-                    $(this).addClass("selected");
-                    $("#" + $(this).parent().attr("id")).val($(this).data("value"));
-                }
-            });
-            function updateMultiSelect(id) {
-                let selectedValues = [];
-                $("#" + id + " .selected").each(function () {
-                    selectedValues.push($(this).data("value"));
-                });
-                $("#selected-" + id).val(selectedValues.join(","));
-            }
-            // Handle form submission (update user data)
-            $("#account-form").submit(function (event) {
-                event.preventDefault();
-
-                let updatedUserData = {
-                    name: $("#name").val(),
-                    email: $("#email").val(),
-                    password: $("#password").val(),
-                    address: $("#address").val(),
-                    birthday: $("#birthday").val(),
-                    travelLocation: $("#travel-location").val(),
-                    travelTime: $("#travel-time").val(),
-                    budget: $("#budget").val(),
-                    interests: $("#selected-interests").val(),
-                    hobbies: $("#selected-hobbies").val(),
-                    whyTravel: $("#why-travel").val(),
-                    travelCompanion: $("#travel-companion").val(),
-                    dreamDestination: $("#dream-destination").val()
-                };
-                localStorage.setItem("userData", JSON.stringify(updatedUserData));
-                alert("Account updated successfully!");
-            });
-        });
-    </script>
+    <form id="account-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      
+      <label for="address">Country:</label>
+      <input type="text" id="address" name="address" required>
+      
+      <label for="birthday">Birthday:</label>
+      <input type="date" id="birthday" name="birthday" required>
+      
+      <label for="travel-location">Where do you want to travel?</label>
+      <input type="text" id="travel-location" name="travel-location">
+      
+      <label for="travel-time">When do you want to travel?</label>
+      <input type="text" id="travel-time" name="travel-time">
+      
+      <label for="budget">Budget:</label>
+      <div class="selection-group">
+        <div class="selection-option" data-value="luxury">Luxury</div>
+        <div class="selection-option" data-value="moderate">Moderate</div>
+        <div class="selection-option" data-value="affordable">Affordable</div>
+      </div>
+      <input type="hidden" name="budget" id="budget" required>
+      
+      <label for="interests">Interests:</label>
+      <div class="selection-group multi-select" id="interests">
+        <div class="selection-option" data-value="hike">Hike</div>
+        <div class="selection-option" data-value="mountains">Mountains</div>
+        <div class="selection-option" data-value="beaches">Beaches</div>
+        <div class="selection-option" data-value="nightlife">Nightlife</div>
+        <div class="selection-option" data-value="adventure">Adventure</div>
+      </div>
+      <input type="hidden" name="selected-interests" id="selected-interests">
+      
+      <label for="hobbies">Hobbies:</label>
+      <div class="selection-group multi-select" id="hobbies">
+        <div class="selection-option" data-value="swimming">Swimming</div>
+        <div class="selection-option" data-value="art">Art</div>
+        <div class="selection-option" data-value="reading">Reading</div>
+        <div class="selection-option" data-value="hiking">Hiking</div>
+      </div>
+      <input type="hidden" name="selected-hobbies" id="selected-hobbies">
+      
+      <label for="why-travel">Tell us why you love traveling:</label>
+      <textarea id="why-travel" name="why-travel"></textarea>
+      
+      <label for="travel-companion">If you could travel with anyone (dead or alive), who would it be?</label>
+      <textarea id="travel-companion" name="travel-companion"></textarea>
+      
+      <label for="dream-destination">What’s your ultimate dream destination?</label>
+      <textarea id="dream-destination" name="dream-destination"></textarea>
+      
+      <button type="submit">Update</button>
+    </form>
+  </div>
+  <script>
+    $(document).ready(function () {
+      // Make an AJAX call to fetch the latest registered user details
+      $.ajax({
+          url: "http://localhost:8000/user/latest",
+          method: "GET",
+          success: function(data) {
+              // Map the API fields to your form inputs
+              $("#name").val(data.fullName);
+              $("#email").val(data.email);
+              $("#password").val(data.password);
+              $("#address").val(data.address);
+              // Format the birthday to YYYY-MM-DD format
+              $("#birthday").val(new Date(data.birthday).toISOString().split('T')[0]);
+              $("#travel-location").val(data.travelLocation);
+              // For travel time, we use travelStart (customize as needed)
+              $("#travel-time").val(new Date(data.travelStart).toLocaleDateString());
+              
+              $("#budget").val(data.budget);
+              if (data.budget) {
+                  $('.selection-option[data-value="' + data.budget + '"]').addClass('selected');
+              }
+              // If interests and hobbies are stored as arrays, join them with commas and mark selections
+              if (data.interests && data.interests.length > 0) {
+                  $("#selected-interests").val(data.interests.join(","));
+                  data.interests.forEach(function(interest){
+                      $('#interests .selection-option[data-value="' + interest + '"]').addClass('selected');
+                  });
+              }
+              if (data.hobbies && data.hobbies.length > 0) {
+                  $("#selected-hobbies").val(data.hobbies.join(","));
+                  data.hobbies.forEach(function(hobby){
+                      $('#hobbies .selection-option[data-value="' + hobby + '"]').addClass('selected');
+                  });
+              }
+              // Map travelReason to why-travel and dreamDestination accordingly
+              $("#why-travel").val(data.travelReason);
+              $("#dream-destination").val(data.dreamDestination);
+              // Use adventure (or another field) for travel companion if needed
+              $("#travel-companion").val(data.adventure);
+          },
+          error: function(err) {
+              console.error("Error fetching user details:", err);
+          }
+      });
+      
+      // Handle selection clicks (same as before)
+      $(".selection-option").click(function () {
+          let isMultiSelect = $(this).parent().hasClass("multi-select");
+          if (isMultiSelect) {
+              $(this).toggleClass("selected");
+              updateMultiSelect($(this).parent().attr("id"));
+          } else {
+              $(this).siblings().removeClass("selected");
+              $(this).addClass("selected");
+              $("#" + $(this).parent().attr("id")).val($(this).data("value"));
+          }
+      });
+      
+      function updateMultiSelect(id) {
+          let selectedValues = [];
+          $("#" + id + " .selected").each(function () {
+              selectedValues.push($(this).data("value"));
+          });
+          $("#selected-" + id).val(selectedValues.join(","));
+      }
+      
+      // Handle form submission (update user data)
+      $("#account-form").submit(function (event) {
+          event.preventDefault();
+  
+          let updatedUserData = {
+              name: $("#name").val(),
+              email: $("#email").val(),
+              password: $("#password").val(),
+              address: $("#address").val(),
+              birthday: $("#birthday").val(),
+              travelLocation: $("#travel-location").val(),
+              travelTime: $("#travel-time").val(),
+              budget: $("#budget").val(),
+              interests: $("#selected-interests").val(),
+              hobbies: $("#selected-hobbies").val(),
+              whyTravel: $("#why-travel").val(),
+              travelCompanion: $("#travel-companion").val(),
+              dreamDestination: $("#dream-destination").val()
+          };
+          // Optionally, you can add an AJAX call here to update the user details on the server.
+          alert("Account updated successfully!");
+      });
+    });
+  </script>
 </body>
 </html>
