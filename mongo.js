@@ -15,7 +15,7 @@ mongoose.connect("mongodb+srv://Team7:Team7@cluster0.gwmug.mongodb.net/?retryWri
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log("MongoDB Connected"))
-    .catch(err => console.log(err));
+  .catch(err => console.log(err));
 
 const userSchema = new mongoose.Schema({
     fullName: { type: String, required: true },
@@ -37,18 +37,23 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-// POST /register – saves the user and updates matches immediately
 app.post("/register", async (req, res) => {
     try {
-        const user = new User(req.body);
-        await user.save();
+        // Save the new user (User A)
+        const newUser = new User(req.body);
+        await newUser.save();
 
-        // Query all users and update matches
-        const users = await User.find();
-        const matches = await generateMatches(users);
-        // Overwrite the file by using the "w" flag (default)
+        // Query for all other users (exclude the new user)
+        const otherUsers = await User.find({ _id: { $ne: newUser._id } });
+
+        // Generate matches based on the new user's profile and the other users' data
+        const matches = await generateMatches(newUser, otherUsers);
+
+        // Overwrite the file with the new matches
         fs.writeFileSync('matched_With_Users.json', matches, { flag: 'w' });
-        res.status(201).send("User Registered Successfully and matches updated");
+        
+        // Return the matches in the response
+        res.status(201).json({ message: "User Registered Successfully", matches: JSON.parse(matches) });
     } catch (error) {
         res.status(400).send(error);
     }
