@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Find a Solo Sister</title>
+  <title>Find a Travel Sister</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
       body {
@@ -30,25 +30,25 @@
           to { opacity: 1; transform: translateY(0); }
       }
       .header {
-        font-size: 42px;
-            font-weight: 700;
-            color: #ff4081;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+          font-size: 42px;
+          font-weight: 700;
+          color: #ff4081;
+          text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
       }
       .nav {
           margin: 20px 0;
       }
       .nav button {
-            background: #ff4081;
-            border: none;
-            padding: 14px 28px;
-            color: white;
-            font-size: 20px;
-            margin: 8px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+          background: #ff4081;
+          border: none;
+          padding: 14px 28px;
+          color: white;
+          font-size: 20px;
+          margin: 8px;
+          border-radius: 30px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
       }
       .nav button:hover {
           background: #e6006e;
@@ -68,10 +68,9 @@
           width: 200px;
           height: 250px;
           border: 6px solid #ffb8dd;
-            object-fit: cover;
+          object-fit: cover;
           margin-right: 20px;
           flex-shrink: 0;
-          
       }
       .match-info {
           text-align: left;
@@ -100,11 +99,27 @@
       .right-arrow {
           right: -40px;
       }
+      .chat-button {
+          background: #ff4081;
+          border: none;
+          padding: 10px 20px;
+          color: white;
+          font-size: 18px;
+          margin-top: 20px;
+          border-radius: 30px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+      }
+      .chat-button:hover {
+          background: #e6006e;
+          transform: scale(1.1);
+      }
   </style>
 </head>
 <body>
   <div class="container">
-      <div class="header">Find Your Solo Sister</div>
+      <div class="header">Find Your Travel Sister</div>
       <div class="nav">
           <a href="index.html"><button>Home</button></a>
           <a href="chat.html"><button>Chat</button></a>
@@ -114,12 +129,13 @@
       </div>
       <div class="match-container">
           <button class="arrow left-arrow" onclick="prevMatch()">&#9665;</button>
-          <img src="placeholder/AdobeStock_805282248.jpeg" alt="placeholder" class=profile-pic>
+          <img src="placeholder/AdobeStock_805282248.jpeg" alt="placeholder" class="profile-pic">
           <div class="match-info" id="match-info">
               <!-- Match details will be displayed here -->
           </div>
           <button class="arrow right-arrow" onclick="nextMatch()">&#9655;</button>
       </div>
+      <a href="chat.html"><button class="chat-button">Chat</button></a> <!-- Added Chat button -->
   </div>
   <script>
       let matches = [];
@@ -155,6 +171,7 @@
               <p><strong>Travel Reason:</strong> ${match.travel_reason}</p>
               <p><strong>Shared Interests:</strong> ${match.shared_interests.join(', ')}</p>
               <p><strong>Match Summary:</strong> ${match.match_summary}</p>
+             
           `;
           document.getElementById('match-info').innerHTML = html;
       }
