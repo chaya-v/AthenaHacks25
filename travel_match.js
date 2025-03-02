@@ -1,15 +1,12 @@
-const fs = require('fs');
-const { MongoClient } = require('mongodb');
-const fetch = require('node-fetch');  // Importing node-fetch
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const apiKey = 'AIzaSyCJafWiBv88DX2iMj6pgjDc_NOZwSu6wL4';
-const apiUrl = 'https://generativeai.googleapis.com/v1/models/gemini-1.5-flash:generateContent'; // Replace with the correct endpoint
+// Initialize the Google Generative AI client
+const genAI = new GoogleGenerativeAI("AIzaSyDxorrWajQDOE99OAPS4PMRyjPvvwzhn3g"); // Replace with your actual API key
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-// const uri = "mongodb+srv://Team7:Team7@cluster0.gwmug.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-// Function to extract and match users based on travel location and travel dates
+// Function to extract and format user data for the prompt
 async function getUserData() {
+    const fs = require('fs');
     // Read the user data from the JSON file
     const data = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 
@@ -18,96 +15,54 @@ async function getUserData() {
         fullName: user.fullName,
         email: user.email,
         travelLocation: user.travelLocation,
-        travelStart: new Date(user.travelStart), 
-        travelEnd: new Date(user.travelEnd),
-        interests: user.interests,
-        hobbies: user.hobbies,
+        travelStart: new Date(user.travelStart).toLocaleDateString(),
+        travelEnd: new Date(user.travelEnd).toLocaleDateString(),
+        interests: user.interests.join(", "),
+        hobbies: user.hobbies.join(", "),
+        travelReason: user.travelReason,
         budget: user.budget
     }));
 }
 
-function checkTravelDateOverlap(start1, end1, start2, end2) {
-    // Check if two date ranges overlap
-    return (start1 <= end2 && end1 >= start2);
-}
-
-// Function to match users based on location, travel dates, interests, and hobbies
-function matchUsers(data) {
-    const matches = [];
-
-    for (let i = 0; i < data.length; i++) {
-        for (let j = i + 1; j < data.length; j++) {
-            const user1 = data[i];
-            const user2 = data[j];
-
-            // Match based on travel location first
-            if (user1.travelLocation === user2.travelLocation) {
-
-                // Check if the travel dates overlap
-                if (checkTravelDateOverlap(user1.travelStart, user1.travelEnd, user2.travelStart, user2.travelEnd)) {
-                    
-                    // Find shared interests and hobbies
-                    const sharedInterests = user1.interests.filter(interest => user2.interests.includes(interest));
-                    const sharedHobbies = user1.hobbies.filter(hobby => user2.hobbies.includes(hobby));
-                    
-                    if (sharedInterests.length > 0 || sharedHobbies.length > 0) {
-                        // If match found, add to the list
-                        matches.push({
-                            user1: user1.fullName,
-                            user2: user2.fullName,
-                            travelLocation: user1.travelLocation,
-                            travelStart: user1.travelStart.toISOString(),
-                            travelEnd: user1.travelEnd.toISOString(),
-                            sharedInterests,
-                            sharedHobbies,
-                            budget1: user1.budget,  // Keeping budget as a string
-                            budget2: user2.budget   // Keeping budget as a string
-                        });
-                    }
-                }
-            }
-        }
-    }
-
-    // Save matched users to a file
-    fs.writeFileSync('matched_users.json', JSON.stringify(matches, null, 2));
-    console.log('✅ Matched users saved to matched_users.json');
-
-    return matches;
-}
-
-// Function to generate content using the Generative AI API (via HTTP request)
+// Function to generate content using Gemini AI
 async function generateContent() {
     try {
         const userData = await getUserData();
 
-        // Match users based on location, travel dates, and profile information
-        const matches = matchUsers(userData);
-
-        // Write matched users to matched_users.json
-        fs.writeFileSync('matched_users.json', JSON.stringify(matches, null, 2));
-
         // Prepare the prompt for generating content
-        const prompt = `Here are the matched users based on their destinations and dates: ${JSON.stringify(matches)}`;
+        const prompt = `
+        We have a dataset of travelers with the following information:
 
-        // Make the API call to generate content using fetch
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ prompt: prompt })
-        });
+        1. **User Details**: Each user has a name, email, travel destination, travel start date, travel end date, interests, hobbies, budget, and travel reason.
+        2. **Task**: Please process the user data and generate insightful, personalized recommendations or matches based on their profiles. Focus on matching users with compatible travel interests, travel dates, locations, and reasons for traveling. 
+        3. **Expectations**: You should:
+           - Suggest users who might match well based on overlapping interests, travel dates, and shared travel reasons.
+           - Highlight users who are traveling to the same or nearby locations during overlapping dates.
+           - Output the user names, their travel details, and travel reasons, and any shared interests or reasons for travel.
+           - Provide a brief summary of why the users are good matches based on the data provided.
 
-        if (!response.ok) {
-            throw new Error(`Request failed with status: ${response.status}`);
-        }
+        Here is the user data in a more readable format:
 
-        const data = await response.json();
+        ${userData.map(user => `
+        Name: ${user.fullName}
+        Email: ${user.email}
+        Travel Location: ${user.travelLocation}
+        Travel Start: ${user.travelStart}
+        Travel End: ${user.travelEnd}
+        Interests: ${user.interests}
+        Hobbies: ${user.hobbies}
+        Travel Reason: ${user.travelReason}
+        Budget: ${user.budget}
+        `).join("\n")}
 
-        // Log the generated content
-        console.log('Generated Content:', data);
+        Please generate the relevant content based on this information, providing the best possible matches.
+        `;
+
+        // Generate the content using Gemini AI
+        const result = await model.generateContent(prompt);
+
+        // Output the result
+        console.log('Generated Content:', result.response.text());
     } catch (error) {
         console.error('Error generating content:', error);
     }
