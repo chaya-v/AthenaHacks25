@@ -1,4 +1,5 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const fs = require('fs');
 
 // Initialize the Google Generative AI client
 const genAI = new GoogleGenerativeAI("AIzaSyDxorrWajQDOE99OAPS4PMRyjPvvwzhn3g"); // Replace with your actual API key
@@ -6,7 +7,6 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 // Function to extract and format user data for the prompt
 async function getUserData() {
-    const fs = require('fs');
     // Read the user data from the JSON file
     const data = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 
@@ -31,17 +31,63 @@ async function generateContent() {
 
         // Prepare the prompt for generating content
         const prompt = `
-        We have a dataset of travelers with the following information:
+We have a dataset of travelers with the following details:  
+- **User Details**: Each user has a name, email, travel destination, travel start date, travel end date, interests, hobbies, budget, and travel reason.  
+- **Objective**: Your task is to generate ranked travel match recommendations based on shared interests, travel locations, and overlapping dates.  
 
-        1. **User Details**: Each user has a name, email, travel destination, travel start date, travel end date, interests, hobbies, budget, and travel reason.
-        2. **Task**: Please process the user data and generate insightful, personalized recommendations or matches based on their profiles. Focus on matching users with compatible travel interests, travel dates, locations, and reasons for traveling. 
-        3. **Expectations**: You should:
-           - Suggest users who might match well based on overlapping interests, travel dates, and shared travel reasons.
-           - Highlight users who are traveling to the same or nearby locations during overlapping dates.
-           - Output the user names, their travel details, and travel reasons, and any shared interests or reasons for travel.
-           - Provide a brief summary of why the users are good matches based on the data provided.
+### **Matching Criteria**:  
+1. **High Priority**: Match users with the most overlapping interests, common travel reasons, and similar locations.  
+2. **Medium Priority**: Users traveling to nearby locations with some shared interests.  
+3. **Low Priority**: Users with minimal shared interests but overlapping travel dates.  
 
-        Here is the user data in a more readable format:
+### **Output Format** (JSON Only):  
+Return a structured JSON response with users grouped by match rankings:  
+
+\`\`\`json
+{
+    "ranked_matches": [
+        {
+            "rank": 1,
+            "group": [
+                {
+                    "name": "User 1",
+                    "travel_details": { "location": "...", "start_date": "...", "end_date": "..." },
+                    "travel_reason": "..."
+                },
+                {
+                    "name": "User 2",
+                    "travel_details": { "location": "...", "start_date": "...", "end_date": "..." },
+                    "travel_reason": "..."
+                },
+                ...
+            ],
+            "commonTravelLocation": "<Shared Location>",
+            "overlappingDates": { "start": "...", "end": "..." },
+            "shared_interests": ["interest1", "interest2", "interest3"],
+            "match_summary": "Why this group is highly compatible."
+        },
+        {
+            "rank": 2,
+            "group": [ ... ],  // Less compatible matches
+            "shared_interests": [...],
+            "match_summary": "Why this group is moderately compatible."
+        },
+        {
+            "rank": 3,
+            "group": [ ... ],  // Least compatible but still matched
+            "shared_interests": [...],
+            "match_summary": "Why this group is less compatible but still a match."
+        }
+    ]
+}
+\`\`\`
+
+### **Ranking Criteria**:  
+- Rank **1** → Highest match (same location, overlapping dates, 3+ shared interests)  
+- Rank **2** → Moderate match (nearby location, partially overlapping dates, 2+ shared interests)  
+- Rank **3** → Lower match (only overlapping dates, minimal shared interests)  
+
+Here is the user data for processing:
 
         ${userData.map(user => `
         Name: ${user.fullName}
@@ -55,14 +101,22 @@ async function generateContent() {
         Budget: ${user.budget}
         `).join("\n")}
 
-        Please generate the relevant content based on this information, providing the best possible matches.
+Please return **ONLY** the JSON output and nothing else.
         `;
 
-        // Generate the content using Gemini AI
         const result = await model.generateContent(prompt);
 
-        // Output the result
-        console.log('Generated Content:', result.response.text());
+        let generatedText = result.response.text().trim(); // Remove leading/trailing spaces
+
+        // If the response contains triple backticks, clean them up
+        if (generatedText.startsWith("```json")) {
+            generatedText = generatedText.replace(/```json/, '').replace(/```/, '').trim();
+        }
+
+        // Save the JSON response to a file
+        fs.writeFileSync('matchedUsers.json', generatedText);
+        console.log("Generated content saved to matchedUsers.json");
+
     } catch (error) {
         console.error('Error generating content:', error);
     }

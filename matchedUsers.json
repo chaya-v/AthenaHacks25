@@ -1,0 +1,94 @@
+{
+  "ranked_matches": [
+    {
+      "rank": 1,
+      "group": [
+        {
+          "name": "Mudra",
+          "travel_details": {
+            "location": "SF",
+            "start_date": "3/8/2025",
+            "end_date": "3/14/2025"
+          },
+          "travel_reason": "It is therapeutic for me."
+        },
+        {
+          "name": "Sophia Patel",
+          "travel_details": {
+            "location": "SF",
+            "start_date": "3/6/2025",
+            "end_date": "3/14/2025"
+          },
+          "travel_reason": "I love trying new cuisines and immersing myself in local traditions."
+        }
+      ],
+      "commonTravelLocation": "SF",
+      "overlappingDates": {
+        "start": "3/8/2025",
+        "end": "3/14/2025"
+      },
+      "shared_interests": ["beaches"],
+      "match_summary": "Both users are traveling to SF and have overlapping travel dates. They share at least one common interest."
+    },
+    {
+      "rank": 2,
+      "group": [
+        {
+          "name": "Mudra",
+          "travel_details": {
+            "location": "SF",
+            "start_date": "3/8/2025",
+            "end_date": "3/14/2025"
+          },
+          "travel_reason": "It is therapeutic for me."
+        },
+        {
+          "name": "Olivia Martinez",
+          "travel_details": {
+            "location": "LA",
+            "start_date": "3/9/2025",
+            "end_date": "3/14/2025"
+          },
+          "travel_reason": "I enjoy discovering new stories and experiences from different places, also its theraputic"
+        }
+      ],
+      "commonTravelLocation": "Nearby Locations (SF and LA)",
+      "overlappingDates": {
+        "start": "3/9/2025",
+        "end": "3/14/2025"
+      },
+      "shared_interests": ["hiking", "mountains", "beaches", "adventure"],
+      "match_summary": "Users are traveling to nearby locations with some overlapping travel dates and multiple shared interests."
+    },
+    {
+      "rank": 3,
+      "group": [
+        {
+          "name": "Emily Carter",
+          "travel_details": {
+            "location": "SD",
+            "start_date": "3/14/2025",
+            "end_date": "3/29/2025"
+          },
+          "travel_reason": "It helps me explore different cultures and meet new people."
+        },
+        {
+          "name": "Isabella Rivera",
+          "travel_details": {
+            "location": "SF",
+            "start_date": "3/7/2025",
+            "end_date": "3/11/2025"
+          },
+          "travel_reason": "It's my way of discovering the beauty of the natural world."
+        }
+      ],
+      "commonTravelLocation": "Different Locations (SD and SF)",
+      "overlappingDates": {
+        "start": null,
+        "end": null
+      },
+      "shared_interests": ["beaches", "adventure"],
+      "match_summary": "Users have minimal overlapping dates and few shared interests but are still considered a match due to shared interests."
+    }
+  ]
+}
