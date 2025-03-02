@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Travel Sisters</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8cdda, #1e90ff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 80%;
+            max-width: 900px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+        }
+
+        .chat-sidebar {
+            width: 30%;
+            background: #ffb6c1;
+            padding: 15px;
+            border-radius: 15px 0 0 15px;
+        }
+
+        .chat-sidebar h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .chat-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chat-list li {
+            padding: 10px;
+            background: #fff;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .chat-list li:hover {
+            background: #ff4081;
+            color: white;
+        }
+
+        .chat-box {
+            width: 70%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f0f8ff;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            width: fit-content;
+            max-width: 70%;
+        }
+
+        .sent {
+            background: #ff4081;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .received {
+            background: #ddd;
+            align-self: flex-start;
+        }
+
+        .chat-input {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ff4081;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .chat-input button {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+
+        .chat-input button:hover {
+            background: #e6006e;
+        }
+		     .nav {
+            margin: 20px 0;
+        }
+        .nav button {
+            background: #ff4081;
+            border: none;
+            padding: 12px 25px;
+            color: white;
+            font-size: 18px;
+            margin: 8px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+        }
+        .nav button:hover {
+            background: #e6006e;
+            transform: scale(1.1);
+        }
+		 .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .header {
+            font-size: 40px;
+            font-weight: 700;
+            color: #ff4081;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+
+</head>
+<body>
+	<div class="container">
+        <div class="header">Find Your Travel Sister</div>
+	    <div class="nav">
+			<a href="index.html">
+            <button>Home</button></a>
+			<a href="chat.html">
+            <button>Chat</button></a>
+			<a href="Travel Tips.html">
+            <button>Tips</button></a>
+			<a href="My Account.html">
+            <button>My Account</button></a>
+        </div>
+
+<div class="chat-container">
+        <div class="chat-sidebar">
+            <h2>Chat Partners</h2>
+
+            <ul class="chat-list">
+                <li>Chat Partner 1</li>
+                <li>Chat Partner 2</li>
+            </ul>
+
+        </div>
+        <div class="chat-box">
+            <div class="chat-messages">
+                <div class="message received">Hello! How's your travel planning going?</div>
+                <div class="message sent">Hey! It's going great, just finalizing my itinerary.</div>
+            </div>
+
+          <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type a message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

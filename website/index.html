@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Sister</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8cdda, #1e90ff);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .header {
+            font-size: 40px;
+            font-weight: 700;
+            color: #ff4081;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .nav {
+            margin: 20px 0;
+        }
+        .nav button {
+            background: #ff4081;
+            border: none;
+            padding: 12px 25px;
+            color: white;
+            font-size: 18px;
+            margin: 8px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+        }
+        .nav button:hover {
+            background: #e6006e;
+            transform: scale(1.1);
+        }
+        .content-box {
+            background: #fff3f8;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .cta {
+            background: #ff4081;
+            color: white;
+            padding: 18px 30px;
+            display: inline-block;
+            margin-top: 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+        }
+        .cta:hover {
+            background: #e6006e;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Travel Sister</div>
+        <div class="nav">
+			<a href="matches.html">
+            <button>Find A Sister</button></a>
+			<a href="chat.html">
+            <button>Chat</button></a>
+			<a href="Travel Tips.html">
+            <button>Tips</button></a>
+			<a href="My Account.html">
+            <button>My Account</button></a>
+        </div>
+        <div class="content-box">
+            <h2>Why search for a travel sister?</h2>
+            <p>
+                Solo traveling for women can be stressful and dangerous. Linking up with a travel sister can give you peace of mind when traveling, and you could end up making a friend for life!
+            </p>
+            <p>
+                To begin, simply create an account with your name, age, travel destination, and travel dates. Our matchmaking system will show you sisters traveling to your destination at the same time! Once you match with a sister, you’ll be able to chat and plan away! We’re like Bumble, but for solo traveling adventurers. Happy traveling!
+            </p>
+        </div>
+        <a href="register.html" class="cta">Get Started</a>
+    </div>
+</body>
+</html>
