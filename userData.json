@@ -1,17 +1,60 @@
 [
-    { "id": 1, "name": "Alice", "destination": "Paris", "startDate": "2025-03-10", "endDate": "2025-03-15" },
-    { "id": 2, "name": "Bob", "destination": "London", "startDate": "2025-03-15", "endDate": "2025-03-20" },
-    { "id": 3, "name": "Charlie", "destination": "Paris", "startDate": "2025-03-12", "endDate": "2025-03-18" },
-    { "id": 4, "name": "David", "destination": "New York", "startDate": "2025-03-20", "endDate": "2025-03-25" },
-    { "id": 5, "name": "Eve", "destination": "London", "startDate": "2025-03-17", "endDate": "2025-03-22" },
-    { "id": 6, "name": "Frank", "destination": "Tokyo", "startDate": "2025-03-25", "endDate": "2025-03-30" },
-    { "id": 7, "name": "Grace", "destination": "Paris", "startDate": "2025-03-10", "endDate": "2025-03-15" },
-    { "id": 8, "name": "Hank", "destination": "Berlin", "startDate": "2025-03-18", "endDate": "2025-03-23" },
-    { "id": 9, "name": "Ivy", "destination": "London", "startDate": "2025-03-15", "endDate": "2025-03-20" },
-    { "id": 10, "name": "Jack", "destination": "New York", "startDate": "2025-03-20", "endDate": "2025-03-25" },
-    { "id": 11, "name": "Kathy", "destination": "Paris", "startDate": "2025-03-10", "endDate": "2025-03-15" },
-    { "id": 12, "name": "Leo", "destination": "Tokyo", "startDate": "2025-03-25", "endDate": "2025-03-30" },
-    { "id": 13, "name": "Mona", "destination": "Berlin", "startDate": "2025-03-18", "endDate": "2025-03-23" },
-    { "id": 14, "name": "Nina", "destination": "Paris", "startDate": "2025-03-10", "endDate": "2025-03-15" },
-    { "id": 15, "name": "Oscar", "destination": "London", "startDate": "2025-03-15", "endDate": "2025-03-20" }
+  {
+    "_id": "67c3eab1bb9522154cbba446",
+    "fullName": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "password123",
+    "address": "123 Main St",
+    "birthday": "1990-01-01T00:00:00.000Z",
+    "travelLocation": "Paris",
+    "travelTime": "Summer 2025",
+    "budget": "2000",
+    "interests": [
+      "culture",
+      "art"
+    ],
+    "hobbies": [
+      "painting",
+      "traveling"
+    ],
+    "travelReason": "Vacation",
+    "dreamDestination": "Bora Bora",
+    "adventure": "Hiking",
+    "bucketList": "Skydiving",
+    "__v": 0
+  },
+  {
+    "_id": "67c422e2eae690843f0c9df5",
+    "fullName": "Chaya",
+    "email": "c@gmail.com",
+    "password": "abcd",
+    "address": "CA",
+    "birthday": "2025-03-04T00:00:00.000Z",
+    "travelLocation": "SD",
+    "budget": "luxury",
+    "interests": [],
+    "hobbies": [],
+    "travelReason": "",
+    "dreamDestination": "",
+    "adventure": "",
+    "bucketList": "",
+    "__v": 0
+  },
+  {
+    "_id": "67c4230beae690843f0c9df7",
+    "fullName": "Abcd",
+    "email": "aaa",
+    "password": "abcd",
+    "address": "CA",
+    "birthday": "2025-03-01T00:00:00.000Z",
+    "travelLocation": "SD",
+    "budget": "luxury",
+    "interests": [],
+    "hobbies": [],
+    "travelReason": "",
+    "dreamDestination": "",
+    "adventure": "",
+    "bucketList": "",
+    "__v": 0
+  }
 ]
