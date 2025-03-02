@@ -10,22 +10,24 @@
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #f8cdda, #1e90ff);
-            min-height: 100vh;
-            background-attachment: fixed;
-            background-size: cover;
             margin: 0;
             padding: 0;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-attachment: fixed;
         }
 
         .container {
-            max-width: 50%;
-            margin: 50px auto;
             background: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1s ease-in-out;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
         }
 
         h2 {
@@ -41,9 +43,6 @@
             margin: 10px 0;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 16px;
-            appearance: none;
-            background: white;
         }
 
         button {
@@ -74,6 +73,7 @@
             margin-top: 10px;
         }
 
+        /* Buffering UI styles */
         #buffering {
             display: none;
             margin-top: 20px;
@@ -89,21 +89,21 @@
 <body>
     <div class="container" id="main-container">
         <h2 id="form-title">Login</h2>
+        <!-- Login Form -->
         <div id="login-form">
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
             <button onclick="displayComingSoon()">Login</button>
             <p id="coming-soon-banner">Coming Soon...</p>
         </div>
-
+        <!-- Register Form -->
         <div id="register-form" style="display: none;">
             <input type="text" id="name" placeholder="Full Name" required>
             <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="reg-password" placeholder="Password" required>
             <input type="text" id="address" placeholder="Country" required>
             <label for="birthday">Birthday:</label>
-            <input type="date" id="birthday" required>
-
+            <input type="date" id="birthday" placeholder="Select your birthday" required>
             <label for="travel-location">Where do you want to travel?</label>
             <select id="travel-location" required>
                 <option value="" disabled selected>Select a location</option>
@@ -113,16 +113,13 @@
                 <option value="SC">Sacramento</option>
                 <option value="BF">Bakersfield</option>
             </select>
-
             <label for="travel-start">Start Date:</label>
             <input type="date" id="travel-start" required>
-
             <label for="travel-end">End Date:</label>
             <input type="date" id="travel-end" required>
-
             <button onclick="nextStep()">Next</button>
         </div>
-
+        <!-- Additional Details Form -->
         <div id="additional-details" style="display: none;">
             <h2>Tell us more about your travel preferences</h2>
             <label for="budget">Budget:</label>
@@ -131,7 +128,6 @@
                 <option value="moderate">Moderate</option>
                 <option value="affordable">Affordable</option>
             </select>
-
             <label for="interests">Interests:</label>
             <select id="interests" multiple>
                 <option value="hiking">Hiking</option>
@@ -140,7 +136,6 @@
                 <option value="nightlife">Nightlife</option>
                 <option value="adventure">Adventure</option>
             </select>
-
             <label for="hobbies">Hobbies:</label>
             <select id="hobbies" multiple>
                 <option value="swimming">Swimming</option>
@@ -148,28 +143,22 @@
                 <option value="reading">Reading</option>
                 <option value="hiking">Hiking</option>
             </select>
-
             <label for="travel-reason">Why do you love traveling?</label>
             <textarea id="travel-reason" placeholder="Share your thoughts..."></textarea>
-
-            <label for="dream-destination">Your dream destination:</label>
+            <label for="dream-destination">If you could visit one place in the world, where would it be?</label>
             <input type="text" id="dream-destination" placeholder="Your dream destination">
-
-            <label for="adventure">Most adventurous thing you've done:</label>
+            <label for="adventure">What's the most adventurous thing you've done?</label>
             <textarea id="adventure" placeholder="Share your experience..."></textarea>
-
-            <label for="bucket-list">Your travel bucket list:</label>
+            <label for="bucket-list">Whats on your travel bucket list?</label>
             <input type="text" id="bucket-list" placeholder="Your top destinations">
-
             <button type="submit" onclick="submitForm(event)">Register</button>
         </div>
-
+        <!-- Buffering UI -->
         <div id="buffering">
             <p>Finding your match...</p>
         </div>
         <p class="toggle" onclick="toggleForm()">Don't have an account? Register</p>
     </div>
-
     <script>
         let isLogin = true;
 
@@ -194,7 +183,42 @@
 
         async function submitForm(event) {
             event.preventDefault();
-            alert("Registration submitted!");
+
+            const userData = {
+                fullName: document.getElementById('name')?.value,
+                email: document.getElementById('email')?.value,
+                password: document.getElementById('reg-password')?.value,
+                address: document.getElementById('address')?.value,
+                birthday: document.getElementById('birthday')?.value,
+                travelLocation: document.getElementById('travel-location')?.value,
+                travelStart: document.getElementById('travel-start')?.value,
+                travelEnd: document.getElementById('travel-end')?.value,
+                budget: document.getElementById('budget')?.value,
+                interests: Array.from(document.getElementById('interests')?.selectedOptions || []).map(option => option.value),
+                hobbies: Array.from(document.getElementById('hobbies')?.selectedOptions || []).map(option => option.value),
+                travelReason: document.getElementById('travel-reason')?.value,
+                dreamDestination: document.getElementById('dream-destination')?.value,
+                adventure: document.getElementById('adventure')?.value,
+                bucketList: document.getElementById('bucket-list')?.value
+            };
+
+            try {
+                const response = await fetch('http://localhost:8000/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData),
+                });
+
+                if (response.ok) {
+                    window.location.replace("index.html");
+                } else {
+                    const errorMessage = await response.text();
+                    alert(`Error: ${errorMessage}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to register. Please try again later.');
+            }
         }
     </script>
 </body>
