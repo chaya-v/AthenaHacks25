@@ -1,60 +1,140 @@
 [
   {
-    "_id": "67c3eab1bb9522154cbba446",
-    "fullName": "John Doe",
-    "email": "john.doe@example.com",
-    "password": "password123",
-    "address": "123 Main St",
-    "birthday": "1990-01-01T00:00:00.000Z",
-    "travelLocation": "Paris",
-    "travelTime": "Summer 2025",
-    "budget": "2000",
+    "_id": "67c435b589f8c54e40f0833b",
+    "fullName": "Mudra ",
+    "email": "mudralimbasia@gmail.com",
+    "password": "123456",
+    "address": "USA",
+    "birthday": "2001-03-09T00:00:00.000Z",
+    "travelLocation": "SF",
+    "travelStart": "2025-03-09T00:00:00.000Z",
+    "travelEnd": "2025-03-15T00:00:00.000Z",
+    "budget": "moderate",
     "interests": [
-      "culture",
-      "art"
+      "hiking",
+      "mountains",
+      "beaches",
+      "adventure"
     ],
     "hobbies": [
-      "painting",
-      "traveling"
+      "swimming",
+      "art",
+      "reading",
+      "hiking"
     ],
-    "travelReason": "Vacation",
-    "dreamDestination": "Bora Bora",
-    "adventure": "Hiking",
-    "bucketList": "Skydiving",
+    "travelReason": "It is therapeutic for me.",
+    "dreamDestination": "My dream destination is Bhutan",
+    "adventure": "Skydiving in Dubai.",
+    "bucketList": "Visiting the Northern Lights in Norway.",
     "__v": 0
   },
   {
-    "_id": "67c422e2eae690843f0c9df5",
-    "fullName": "Chaya",
-    "email": "c@gmail.com",
-    "password": "abcd",
-    "address": "CA",
-    "birthday": "2025-03-04T00:00:00.000Z",
+    "_id": "67c4366189f8c54e40f0833d",
+    "fullName": "Emily Carter",
+    "email": "emilyc@gmail.com",
+    "password": "ememe",
+    "address": "USA",
+    "birthday": "2002-02-01T00:00:00.000Z",
     "travelLocation": "SD",
+    "travelStart": "2025-03-15T00:00:00.000Z",
+    "travelEnd": "2025-03-30T00:00:00.000Z",
     "budget": "luxury",
-    "interests": [],
-    "hobbies": [],
-    "travelReason": "",
-    "dreamDestination": "",
-    "adventure": "",
-    "bucketList": "",
+    "interests": [
+      "beaches",
+      "nightlife",
+      "adventure"
+    ],
+    "hobbies": [
+      "swimming",
+      "reading"
+    ],
+    "travelReason": "It helps me explore different cultures and meet new people.",
+    "dreamDestination": "My dream destination is the Maldives.",
+    "adventure": "Skydiving in Dubai.",
+    "bucketList": "Visiting the Northern Lights in Norway.",
     "__v": 0
   },
   {
-    "_id": "67c4230beae690843f0c9df7",
-    "fullName": "Abcd",
-    "email": "aaa",
-    "password": "abcd",
-    "address": "CA",
-    "birthday": "2025-03-01T00:00:00.000Z",
-    "travelLocation": "SD",
+    "_id": "67c437e489f8c54e40f0833f",
+    "fullName": "Sophia Patel",
+    "email": "spatel@gmail.com",
+    "password": "spsp",
+    "address": "USA",
+    "birthday": "1995-12-30T00:00:00.000Z",
+    "travelLocation": "SF",
+    "travelStart": "2025-03-07T00:00:00.000Z",
+    "travelEnd": "2025-03-15T00:00:00.000Z",
+    "budget": "affordable",
+    "interests": [
+      "beaches",
+      "nightlife"
+    ],
+    "hobbies": [
+      "swimming",
+      "art"
+    ],
+    "travelReason": "I love trying new cuisines and immersing myself in local traditions.",
+    "dreamDestination": "My dream destination is Japan.",
+    "adventure": "Scuba diving in the Great Barrier Reef.",
+    "bucketList": "xploring the Amazon Rainforest.",
+    "__v": 0
+  },
+  {
+    "_id": "67c4384f89f8c54e40f08341",
+    "fullName": "Olivia Martinez",
+    "email": "olivia.martinez@gmail.com",
+    "password": "omom",
+    "address": "USA",
+    "birthday": "1997-07-17T00:00:00.000Z",
+    "travelLocation": "LA",
+    "travelStart": "2025-03-10T00:00:00.000Z",
+    "travelEnd": "2025-03-15T00:00:00.000Z",
+    "budget": "moderate",
+    "interests": [
+      "hiking",
+      "mountains",
+      "beaches",
+      "nightlife",
+      "adventure"
+    ],
+    "hobbies": [
+      "swimming",
+      "art",
+      "reading",
+      "hiking"
+    ],
+    "travelReason": "I enjoy discovering new stories and experiences from different places, also its theraputic",
+    "dreamDestination": "My dream destination is Italy.",
+    "adventure": "Driving across the U.S. in a camper van.",
+    "bucketList": "Visiting the pyramids of Egypt.",
+    "__v": 0
+  },
+  {
+    "_id": "67c438c389f8c54e40f08343",
+    "fullName": "Isabella Rivera",
+    "email": "isariv@gmail.com",
+    "password": "irir",
+    "address": "USA",
+    "birthday": "2004-08-25T00:00:00.000Z",
+    "travelLocation": "SF",
+    "travelStart": "2025-03-08T00:00:00.000Z",
+    "travelEnd": "2025-03-12T00:00:00.000Z",
     "budget": "luxury",
-    "interests": [],
-    "hobbies": [],
-    "travelReason": "",
-    "dreamDestination": "",
-    "adventure": "",
-    "bucketList": "",
+    "interests": [
+      "beaches",
+      "nightlife",
+      "adventure"
+    ],
+    "hobbies": [
+      "swimming",
+      "art",
+      "reading",
+      "hiking"
+    ],
+    "travelReason": "It’s my way of discovering the beauty of the natural world.",
+    "dreamDestination": "My dream destination is Bhutan",
+    "adventure": "Cage diving with great white sharks.",
+    "bucketList": "Visiting the Northern Lights in Norway.",
     "__v": 0
   }
 ]
