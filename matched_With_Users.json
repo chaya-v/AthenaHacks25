@@ -1,0 +1,37 @@
+{
+  "matches": [
+    {
+      "name": "Sophia Patel",
+      "travel_details": {
+        "location": "SF",
+        "start_date": "3/6/2025",
+        "end_date": "3/14/2025"
+      },
+      "travel_reason": "I love trying new cuisines and immersing myself in local traditions.",
+      "shared_interests": ["beaches"],
+      "match_summary": "Overlapping travel dates and shared interest in beaches in SF."
+    },
+    {
+      "name": "Olivia Martinez",
+      "travel_details": {
+        "location": "LA",
+        "start_date": "3/9/2025",
+        "end_date": "3/14/2025"
+      },
+      "travel_reason": "I enjoy discovering new stories and experiences from different places, also its theraputic",
+      "shared_interests": ["hiking", "mountains", "beaches", "adventure"],
+      "match_summary": "Significant overlap in interests (hiking, mountains, beaches, adventure) and partially overlapping travel dates."
+    },
+    {
+      "name": "Isabella Rivera",
+      "travel_details": {
+        "location": "SF",
+        "start_date": "3/7/2025",
+        "end_date": "3/11/2025"
+      },
+      "travel_reason": "It’s my way of discovering the beauty of the natural world.",
+      "shared_interests": ["beaches", "adventure"],
+      "match_summary": "Overlapping travel dates and shared interest in beaches and adventure in SF."
+    }
+  ]
+}
