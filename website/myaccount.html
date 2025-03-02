@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Account Details</h2>
+        <form id="account-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="John Doe" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="johndoe@example.com" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="password123" required>
+            
+            <label for="address">Country:</label>
+            <input type="text" id="address" name="address" value="USA" required>
+            
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday" value="1990-01-01" required>
+            
+            <label for="travel-location">Where do you want to travel?</label>
+            <input type="text" id="travel-location" name="travel-location" value="Paris">
+            
+            <label for="travel-time">When do you want to travel?</label>
+            <input type="text" id="travel-time" name="travel-time" value="Summer 2025">
+            
+            <label for="budget">Budget:</label>
+            <div class="selection-group">
+                <div class="selection-option" data-value="luxury">Luxury</div>
+                <div class="selection-option" data-value="moderate">Moderate</div>
+                <div class="selection-option" data-value="affordable">Affordable</div>
+            </div>
+            <input type="hidden" name="budget" id="budget" required>
+            
+            <label for="interests">Interests:</label>
+            <div class="selection-group multi-select" id="interests">
+                <div class="selection-option" data-value="hike">Hike</div>
+                <div class="selection-option" data-value="mountains">Mountains</div>
+                <div class="selection-option" data-value="beaches">Beaches</div>
+                <div class="selection-option" data-value="nightlife">Nightlife</div>
+                <div class="selection-option" data-value="adventure">Adventure</div>
+            </div>
+            <input type="hidden" name="selected-interests" id="selected-interests">
+            
+            <label for="hobbies">Hobbies:</label>
+            <div class="selection-group multi-select" id="hobbies">
+                <div class="selection-option" data-value="swimming">Swimming</div>
+                <div class="selection-option" data-value="art">Art</div>
+                <div class="selection-option" data-value="reading">Reading</div>
+                <div class="selection-option" data-value="hiking">Hiking</div>
+            </div>
+            <input type="hidden" name="selected-hobbies" id="selected-hobbies">
+            
+            <label for="why-travel">Tell us why you love traveling:</label>
+            <textarea id="why-travel" name="why-travel">I love traveling to explore new cultures.</textarea>
+            
+            <label for="travel-companion">If you could travel with anyone (dead or alive), who would it be?</label>
+            <textarea id="travel-companion" name="travel-companion">My best friend</textarea>
+            
+            <label for="dream-destination">What’s your ultimate dream destination?</label>
+            <textarea id="dream-destination" name="dream-destination">Bali</textarea>
+            
+            <button type="submit">Update</button>
+        </form>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            $('.selection-option').click(function() {
+                let isMultiSelect = $(this).parent().hasClass('multi-select');
+                
+                if (isMultiSelect) {
+                    $(this).toggleClass('selected');
+                    updateMultiSelect($(this).parent().attr('id'));
+                } else {
+                    $(this).siblings().removeClass('selected');
+                    $(this).addClass('selected');
+                    $('#' + $(this).parent().attr('id')).val($(this).data('value'));
+                }
+            });
+        });
+
+        function updateMultiSelect(id) {
+            let selectedValues = [];
+            $('#' + id + ' .selected').each(function() {
+                selectedValues.push($(this).data('value'));
+            });
+            $('#selected-' + id).val(selectedValues.join(','));
+        }
+    </script>
+</body>
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow-y: auto;
+    }
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        width: 50%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .selection-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .selection-option {
+        padding: 10px 15px;
+        border: 2px solid #ff758c;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-align: center;
+    }
+    .selection-option:hover, .selection-option.selected {
+        background: #ff758c;
+        color: white;
+    }
+    textarea, input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        background: #ff758c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+    button:hover {
+        background: #ff4e64;
+    }
+</style>
